@@ -33,7 +33,7 @@ To use the application you use the menu provided. After completed the task sekec
 <img src="./assets/images/screenshot.png" alt="employee tracker screenshot" width="600"/>
 
 
-<img src="./assets/images/employee-tracker.mov" alt="employee tracker movie" width="600"/>
+<img src="./assets/images/employee-traker.mov" alt="employee tracker movie" width="600"/>
 
 ### Link to demo video
 
