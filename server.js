@@ -179,7 +179,7 @@ addRole = () => {
   
         db.query(sql, (err, deptSelection) => {
             if (err) throw err; 
-            const department = deptSelection.map(({ name, id }) => ({ name: name, id: id }));
+            const department = deptSelection.map(({ name, id }) => ({ name: name, value: id }));
             inquirer.prompt ([
             {
                 type: 'list', 
@@ -192,10 +192,9 @@ addRole = () => {
             newRole.push(answer.department);
             const sql = `INSERT INTO role (title, salary, department_id)
                          VALUES (?, ?, ?)`;
-
             db.query(sql, newRole, (err, result) => {
                 if (err) throw err;
-                console.log('Added' + newRole[0] + " to the database");
+                console.log('Added ' + newRole[0] + ' to the database');
                 mainMenu();
             });
         }); 
@@ -265,7 +264,6 @@ addEmployee = () => {
                 const manager = managerSelection.map(({ id, first_name, last_name }) => ({ name: first_name + ' ' + last_name, value: id })); 
                 nobody = {name: "None", value: null};
                 manager.push(nobody);
-                console.log(manager)
                 inquirer.prompt ([
                 {
                     type: 'list',
