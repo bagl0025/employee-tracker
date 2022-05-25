@@ -28,9 +28,13 @@ Employee tracker is a program that allows you to view and manage the departments
 ## Usage
 To use the application you use the menu provided. After completed the task sekected you will be returned to the menu. To exit the application select `Quit` from the menu. A video is provided below showing the full functionality of the program.
 
-SCREENSHOT <img src="./assets/landing.png" alt="express note taker home page screenshot" width="600"/>
+### Employee tracker startup page
 
-video link
+<img src="./assets/images/screenshot.png" alt="employee tracker screenshot" width="600"/>
+
+### Link to demo video
+
+[Demo Video](https://drive.google.com/file/d/1vqj7zHCmdeJgTr5-SgzsGTkV4gqw1sM-/view?usp=sharing)
 
 ## License
 This software is under the [MIT](./LICENSE) license.

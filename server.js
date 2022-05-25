@@ -309,7 +309,6 @@ updateEmployee = () => {
           db.query(sql, (err, newRole) => {
             if (err) throw err; 
             const updateRole = newRole.map(({id, title}) => ({name: title, value: id}));
-            console.log('bcb', updateRole)
             inquirer.prompt([
                 {
                   type: 'list',
@@ -355,7 +354,9 @@ viewBudget = () => {
     
         db.query(sql, answer.name, (err, result) => {
             if (err) throw err;
+            console.log('----------------------------------------------------');
             console.log('The budget for ' + deptName + ' is $' + result[0].budget); 
+            console.log('----------------------------------------------------');
             mainMenu(); 
         });
     });
