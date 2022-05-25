@@ -46,6 +46,7 @@ const mainMenu = () => {
                       'Add an employee',
                       'Update an employee',
                       'View department budget',
+                      'View employees by department',
                       'Quit'
                     ]
         }
@@ -75,6 +76,9 @@ const mainMenu = () => {
         }
         else if (choices === 'View department budget') {
             viewBudget();
+        }
+        else if (choices === 'View employees by department') {
+            viewEmpByDept();
         }
         else if (choices === 'Quit') {
             db.end();
@@ -346,7 +350,6 @@ viewBudget = () => {
     ])
     .then(answer => {
         const deptName = dept[answer.name - 1].name; 
-        console.log(deptName)    
         const sql = `SELECT department_id AS id,
                    SUM(salary) AS budget 
                    FROM role 
@@ -355,6 +358,35 @@ viewBudget = () => {
         db.query(sql, answer.name, (err, result) => {
             if (err) throw err;
             console.log('The budget for ' + deptName + ' is $' + result[0].budget); 
+            mainMenu(); 
+        });
+    });
+  });            
+};
+
+viewEmpByDept = () => {
+    const sql = `SELECT * FROM department`;
+    db.query(sql, (err, deptSelection) => {
+    if (err) throw err; 
+    const dept = deptSelection.map(({name, id}) => ({name: name, value: id}));
+    inquirer.prompt ([
+        {
+          type: 'list',
+          name: 'name',
+          message: "Which department's employees would you like to see?",
+          choices: dept
+        }
+    ])
+    .then(answer => {
+        const deptName = dept[answer.name - 1].name; 
+        const sql = `SELECT first_name, last_name, name AS department_name FROM employee
+                    LEFT JOIN role on employee.role_id = role.id
+                    LEFT JOIN department on role.department_id = department.id
+                    WHERE role.department_id = ?`;
+    
+        db.query(sql, answer.name, (err, result) => {
+            if (err) throw err;
+            console.table(result); 
             mainMenu(); 
         });
     });
